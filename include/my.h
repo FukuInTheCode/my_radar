@@ -46,23 +46,31 @@ typedef struct {
     func f;
 } my_evt_t;
 
+typedef struct {
+    bool show_hitbox;
+    bool show_texture;
+} my_flags_t;
+
 typedef struct obj {
     sfSprite *sprite;
     bool is_plane;
     union {
         struct {
             bool is_flying;
+            bool is_dead;
             sfVector2f velocity;
             sfVector2f to;
             sfVector2f from;
             uint64_t depart_time;
             double time_alive;
+            sfFloatRect bounds;
         };
         sfCircleShape *zone;
     };
     struct obj *next;
 } my_obj_t;
 
+int get_global_bounds(my_obj_t *);
 int my_getnbr(char const *);
 size_t my_strlen(char const *);
 int my_strncmp(char const *, char const *, int);
@@ -71,7 +79,7 @@ int open_file(char const *);
 int display_usage(void);
 int game_loop(my_obj_t *);
 int update_plane(sfRenderWindow *, my_obj_t *, void *, sfClock *);
-int draw_plane(sfRenderWindow *, my_obj_t *);
+int draw_plane(sfRenderWindow *, my_obj_t *, my_flags_t *);
 int do_events_loop(sfRenderWindow *, my_obj_t *, void **);
 char **my_str_to_word_array(char const *);
 char *my_strdup(char const *);
