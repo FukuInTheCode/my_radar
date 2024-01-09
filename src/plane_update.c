@@ -7,7 +7,7 @@
 
 #include "my.h"
 
-int update_plane(sfRenderWindow *w, my_plane_t *head, void *tree)
+int update_plane(sfRenderWindow *w, my_obj_t *head, void *tree)
 {
     return 0;
 }

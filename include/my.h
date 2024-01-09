@@ -32,6 +32,7 @@
     #include <SFML/System.h>
     #include <SFML/Window.h>
 
+    #define GETNBR_CHECK (is_int_stred(str[i]) || is_sign_stred(str[i]))
 
 typedef int(*func)();
 
@@ -45,20 +46,26 @@ typedef struct {
     func f;
 } my_evt_t;
 
-typedef struct plane {
+typedef struct obj {
     sfSprite *sprite;
     bool is_flying;
-    struct plane *next;
-} my_plane_t;
+    bool is_plane;
+    struct obj *next;
+} my_obj_t;
 
+int my_getnbr(char const *);
 size_t my_strlen(char const *);
 int my_strncmp(char const *, char const *, int);
+int my_strcmp(char const *, char const *);
 int open_file(char const *);
 int display_usage(void);
-int game_loop(my_plane_t *);
-int update_plane(sfRenderWindow *, my_plane_t *, void *);
-int draw_plane(sfRenderWindow *, my_plane_t *);
-int do_events_loop(sfRenderWindow *, my_plane_t *, void **);
+int game_loop(my_obj_t *);
+int update_plane(sfRenderWindow *, my_obj_t *, void *);
+int draw_plane(sfRenderWindow *, my_obj_t *);
+int do_events_loop(sfRenderWindow *, my_obj_t *, void **);
+char **my_str_to_word_array(char const *);
+char *my_strdup(char const *);
+char *my_strcpy(char *, char const *);
 
 static my_evt_t const my_events[] = {
 //    {sfEvtClosed, handle_close},
@@ -69,5 +76,13 @@ static my_evt_t const my_events[] = {
 static char const *paths[] __attribute__((unused)) =
     {"./assets/plane.png", "./assets/tower.png",
     "./assets/planisphere.jpg"};
+
+static inline __attribute__((unused)) int word_array_len(char **arr)
+{
+    int i = 0;
+
+    for (; arr[i]; i++);
+    return i;
+}
 
 #endif

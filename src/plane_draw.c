@@ -7,7 +7,7 @@
 
 #include "my.h"
 
-int draw_plane(sfRenderWindow *w, my_plane_t *head)
+int draw_plane(sfRenderWindow *w, my_obj_t *head)
 {
     return 0;
 }

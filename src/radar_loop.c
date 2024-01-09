@@ -14,7 +14,7 @@ static int create_window(sfRenderWindow **w)
     return 0;
 }
 
-int game_loop(my_plane_t *head)
+int game_loop(my_obj_t *head)
 {
     int error = 0;
     sfClock *clock = sfClock_create();
