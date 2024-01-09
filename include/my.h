@@ -33,6 +33,7 @@
     #include <SFML/Window.h>
 
     #define GETNBR_CHECK (is_int_stred(str[i]) || is_sign_stred(str[i]))
+    #define QUADTREE_SIZE 4
 
 typedef int(*func)();
 
@@ -68,6 +69,17 @@ typedef struct obj {
     };
     struct obj *next;
 } my_obj_t;
+
+typedef struct qtree {
+    bool is_leaf;
+    my_obj_t *arr[QUADTREE_SIZE];
+    struct {
+        struct qtree *top_l;
+        struct qtree *top_r;
+        struct qtree *bot_l;
+        struct qtree *bot_r;
+    };
+} my_qtree_t;
 
 typedef enum {
     LINEAR,
