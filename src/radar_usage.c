@@ -16,7 +16,7 @@ int display_usage(void)
         return 84;
     if (fread(buf, 1, 1000, fd) == 0)
         return 84;
-    write(0, buf, my_strlen(buf));
+    write(1, buf, my_strlen(buf));
     fclose(fd);
     return 0;
 }

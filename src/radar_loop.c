@@ -22,7 +22,7 @@ int game_loop(my_obj_t *head)
 {
     int error = 0;
     sfClock *clock = sfClock_create();
-    my_container_t con = {setup_linear, check_linear, NULL};
+    my_container_t con = {LINEAR, setup_linear, check_linear, NULL};
     sfRenderWindow *w = NULL;
     sfSprite *bg = sfSprite_create();
     my_flags_t flags = {true, true};

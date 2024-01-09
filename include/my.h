@@ -71,8 +71,11 @@ typedef struct obj {
 } my_obj_t;
 
 typedef struct qtree {
-    bool is_leaf;
+    bool is_leaf  ;
     my_obj_t *arr[QUADTREE_SIZE];
+    uint8_t len;
+    sfVector2f top_left;
+    sfVector2f bot_right;
     struct {
         struct qtree *top_l;
         struct qtree *top_r;
