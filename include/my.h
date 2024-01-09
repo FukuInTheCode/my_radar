@@ -34,6 +34,7 @@
 
     #define GETNBR_CHECK (is_int_stred(str[i]) || is_sign_stred(str[i]))
     #define QUADTREE_SIZE 4
+    #define CV(p) (void *)(p)
 
 typedef int(*func)();
 
@@ -106,7 +107,7 @@ int my_strncmp(char const *, char const *, int);
 int my_strcmp(char const *, char const *);
 int open_file(char const *);
 int display_usage(void);
-int game_loop(my_obj_t **, size_t);
+int game_loop(my_obj_t **);
 int update_plane(sfRenderWindow *, my_obj_t *, my_container_t *, sfClock *);
 int draw_plane(sfRenderWindow *, my_obj_t *, my_flags_t *);
 int draw_tower(sfRenderWindow *, my_obj_t *, my_flags_t *);

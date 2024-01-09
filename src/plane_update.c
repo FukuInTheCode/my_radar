@@ -42,8 +42,6 @@ static int inside_loop(my_obj_t *head, sfVector2f pos, my_obj_t *first)
 int update_plane(sfRenderWindow *w, my_obj_t *head, my_container_t *con,
     sfClock *clock)
 {
-    if (sfTime_asSeconds(sfClock_getElapsedTime(clock)) < 1. / 20.)
-        return 0;
     for (my_obj_t *tmp = head; tmp; tmp = tmp->next)
         inside_loop(tmp, (sfVector2f){0., 0.}, head);
     con->setup_f(head, con);

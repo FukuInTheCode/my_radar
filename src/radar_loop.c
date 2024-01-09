@@ -19,9 +19,22 @@ static int create_all(sfRenderWindow **w, sfSprite *bg)
     return 0;
 }
 
-static int free_all(sfRenderWindow *w, sfClock *clock,
-    sfSprite *bg, my_obj_t *head)
+int free_txt(sfText *text)
 {
+    if (!text)
+        return 0;
+    if (sfText_getFont(text))
+        sfFont_destroy((void *)sfText_getFont(text));
+    sfText_destroy(text);
+    return 0;
+}
+
+static int free_all(sfRenderWindow *w, sfClock *clock,
+    void **arr, my_obj_t *head)
+{
+    sfSprite *bg = *arr;
+
+    free_txt(arr[1]);
     if (w)
         sfRenderWindow_destroy(w);
     if (bg && sfSprite_getTexture(bg))
@@ -53,7 +66,40 @@ static bool check_end(my_obj_t *head)
     return false;
 }
 
-int game_loop(my_obj_t **head, size_t elasped)
+static int inside_loop(my_obj_t **head, sfRenderWindow *w,
+    sfText *text, char *fps)
+{
+    printf("%s\n", fps);
+    sfText_setString(text, fps);
+    sfRenderWindow_drawText(w, text, NULL);
+    sfRenderWindow_display(w);
+    if (check_end(*head))
+        sfRenderWindow_close(w);
+    free(fps);
+    return 0;
+}
+
+sfText *create_text(void)
+{
+    sfFont *font = sfFont_createFromFile("assets/Delfino.ttf");
+    sfText *text = sfText_create();
+
+    if (!text || !font)
+        return NULL;
+    sfText_setFont(text, font);
+    sfText_setFillColor(text, sfRed);
+    sfText_setCharacterSize(text, 42);
+    sfText_setString(text, "0");
+    return text;
+}
+
+int reset_clock(sfClock *clock)
+{
+    sfClock_restart(clock);
+    return 0;
+}
+
+int game_loop(my_obj_t **head)
 {
     sfClock *clock = sfClock_create();
     my_container_t con = {LINEAR, setup_linear, check_linear, NULL};
@@ -61,15 +107,17 @@ int game_loop(my_obj_t **head, size_t elasped)
     sfSprite *bg = sfSprite_create();
     my_flags_t flags = {false, true};
     int error = create_all(&w, bg);
+    sfText *text = create_text();
 
-    for (sfClock *c = sfClock_create(); !error && sfRenderWindow_isOpen(w);) {
+    for (double time = 0; !error && sfRenderWindow_isOpen(w);) {
+        if (sfTime_asSeconds(sfClock_getElapsedTime(clock)) < 1. / 20.)
+            continue;
         sfRenderWindow_clear(w, sfBlack);
         sfRenderWindow_drawSprite(w, bg, NULL);
         do_events_loop(w, &flags, &con) | 1 && draw_plane(w, *head, &flags);
         !draw_tower(w, *head, &flags) && update_plane(w, *head, &con, clock);
-        sfRenderWindow_display(w);
-        if (check_end(*head))
-            sfRenderWindow_close(w);
+        inside_loop(head, w, text, my_put_nbr((int)time)) | reset_clock(clock);
+        time += 1. / 20.;
     }
-    return error | free_all(w, clock, bg, *head);
+    return error | free_all(w, clock, (void *[2]){CV(bg), CV(text)}, *head);
 }
