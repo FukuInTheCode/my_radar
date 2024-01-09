@@ -47,8 +47,7 @@ typedef struct {
 
 typedef struct plane {
     sfSprite *sprite;
-    void *type;
-    func type_f;
+    bool is_flying;
     struct plane *next;
 } my_plane_t;
 
@@ -56,6 +55,7 @@ size_t my_strlen(char const *);
 int my_strncmp(char const *, char const *, int);
 int open_file(char const *);
 int display_usage(void);
+int game_loop(sfRenderWindow *, my_plane_t *);
 
 static my_evt_t const my_events[] = {
 //    {sfEvtClosed, handle_close},
