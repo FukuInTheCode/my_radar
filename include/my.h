@@ -121,6 +121,8 @@ int add_tower(my_obj_t **, char **);
 bool inside_tower(my_obj_t *, sfFloatRect);
 int check_linear(my_obj_t *, void *);
 int setup_linear(my_obj_t *, my_container_t *);
+int setup_qtree(my_obj_t *, my_container_t *);
+int check_quadtree(my_obj_t *, my_qtree_t *);
 bool rect_intersect(sfFloatRect a, sfFloatRect b);
 int add_plane_qtree(my_qtree_t *, my_obj_t *);
 int remove_plane(my_obj_t *);

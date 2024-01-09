@@ -10,7 +10,7 @@
 
 static int create_all(sfRenderWindow **w, sfSprite *bg)
 {
-    *w = sfRenderWindow_create((sfVideoMode){1920, 1080, 32}, "9/11",
+    *w = sfRenderWindow_create((sfVideoMode){1920, 1080, 32}, "my_radar",
         sfClose | sfTitlebar, NULL);
     sfSprite_setTexture(bg, sfTexture_createFromFile(paths[2],
         NULL), sfTrue);
@@ -69,7 +69,6 @@ static bool check_end(my_obj_t *head)
 static int inside_loop(my_obj_t **head, sfRenderWindow *w,
     sfText *text, char *fps)
 {
-    printf("%s\n", fps);
     sfText_setString(text, fps);
     sfRenderWindow_drawText(w, text, NULL);
     sfRenderWindow_display(w);

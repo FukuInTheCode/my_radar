@@ -42,12 +42,18 @@ static int inside_loop(my_obj_t *head, sfVector2f pos, my_obj_t *first)
 int update_plane(sfRenderWindow *w, my_obj_t *head, my_container_t *con,
     sfClock *clock)
 {
+    my_obj_t *tmp2 = head;
+
     for (my_obj_t *tmp = head; tmp; tmp = tmp->next)
         inside_loop(tmp, (sfVector2f){0., 0.}, head);
     con->setup_f(head, con);
     for (; head; head = head->next)
         head->is_plane && !head->is_dead && head->is_flying &&
             con->check_f(head, con->data);
+    if (con->type != QUADTREE)
+        return 0;
+    for (; tmp2; tmp2 = tmp2->next)
+        tmp2->is_dead && remove_plane(tmp2);
     sfClock_restart(clock);
     return 0;
 }

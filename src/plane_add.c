@@ -62,7 +62,13 @@ int add_plane(my_obj_t **head, char **arr)
 {
     my_obj_t *new = malloc(sizeof(my_obj_t));
     static sfTexture *t = NULL;
+    static int id = 0;
 
+    id++;
+    if (id > 3500) {
+        free(new);
+        return 0;
+    }
     t = sfTexture_createFromFile(paths[0], NULL);
     if (!new || !t)
         return 84;
