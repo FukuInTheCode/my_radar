@@ -27,17 +27,17 @@ char **my_str_to_word_array(char const *str)
     char *tmp = my_strdup(str);
     size_t sub_i = 0;
 
-    for (int i = 0; str[i]; i++) {
+    for (int i = 0; str[i]; i++)
         if (is_alphanum(str[i]) != 0 && is_alphanum(str[i + 1]) == 0)
             count++;
-    }
     ret = malloc(sizeof(char *) * (count + 1));
     for (int i = 0; str[i]; i++)
         tmp[i] -= tmp[i] * (is_alphanum(tmp[i]) == 0);
     for (int i = 0; str[i]; i++) {
         if (!tmp[i])
             continue;
-        i += dup_str(ret, sub_i++, tmp, i) - 1;
+        i += dup_str(ret, sub_i, tmp, i) - 1;
+        sub_i++;
     }
     ret[count] = NULL;
     free(tmp);

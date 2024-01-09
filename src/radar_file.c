@@ -44,7 +44,6 @@ static int check_line(char **arr)
     return check_line2(arr, i);
 }
 
-
 static int check_file(FILE *fd, size_t n, my_obj_t *head)
 {
     char *line = NULL;

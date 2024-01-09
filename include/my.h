@@ -7,8 +7,7 @@
 
 #ifndef MY_H
     #define MY_H
-    #include <SFML/Window/Event.h>
-#define  _GNU_SOURCE
+    #define  _GNU_SOURCE
     #include <stdio.h>
     #include <unistd.h>
     #include <stdint.h>
