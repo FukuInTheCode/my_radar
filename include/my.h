@@ -54,7 +54,6 @@ typedef struct obj {
             bool is_flying;
             sfVector2f velocity;
             sfVector2f to;
-            sfFloatRect hitbox;
             uint64_t depart_time;
         };
         sfCircleShape *zone;
@@ -69,7 +68,7 @@ int my_strcmp(char const *, char const *);
 int open_file(char const *);
 int display_usage(void);
 int game_loop(my_obj_t *);
-int update_plane(sfRenderWindow *, my_obj_t *, void *);
+int update_plane(sfRenderWindow *, my_obj_t *, void *, sfClock *);
 int draw_plane(sfRenderWindow *, my_obj_t *);
 int do_events_loop(sfRenderWindow *, my_obj_t *, void **);
 char **my_str_to_word_array(char const *);
