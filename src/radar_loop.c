@@ -41,7 +41,7 @@ static int free_all(sfRenderWindow *w, sfClock *clock,
 
 static bool check_end(my_obj_t *head)
 {
-    bool has_plane_first = head->is_plane;
+    bool has_plane_first = head->is_plane && head->is_dead;
     int i = 0;
 
     for (; head; head = head->next)
