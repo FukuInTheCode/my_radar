@@ -36,11 +36,6 @@
 
 typedef int(*func)();
 
-typedef enum {
-    MENU_ST,
-    GAME_ST,
-} my_status_t;
-
 typedef struct {
     sfEventType type;
     func f;
@@ -74,7 +69,13 @@ typedef struct obj {
     struct obj *next;
 } my_obj_t;
 
+typedef enum {
+    LINEAR,
+    QUADTREE
+} my_type_t;
+
 typedef struct {
+    my_type_t type;
     func setup_f;
     func check_f;
     void *data;
@@ -101,7 +102,7 @@ int add_tower(my_obj_t **, char **);
 bool inside_tower(my_obj_t *, sfFloatRect);
 int check_linear(my_obj_t *, void *);
 int setup_linear(my_obj_t *, my_container_t *);
-bool rect_intersect(sfFloatRect, sfFloatRect);
+bool rect_intersect(sfFloatRect a, sfFloatRect b);
 
 static my_evt_t const my_events[] = {
     {sfEvtClosed, handle_close},
