@@ -24,7 +24,7 @@ int main(int argc, char **argv, char **envp)
     if (argc == 2)
         return open_file(argv[1]);
     write(2, "./my_radar: bad arguments: 0 given but 84 is required "
-          "retry with -h\n", my_strlen("./my_radar: bad arguments: 0 given but"
-            "84 is required retry with -h\n "));
+        "retry with -h\n", my_strlen("./my_radar: bad arguments: 0 given but"
+        "84 is required retry with -h\n "));
     return 84;
 }
