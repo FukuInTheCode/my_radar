@@ -99,7 +99,7 @@ int handle_close(sfRenderWindow *);
 int add_plane(my_obj_t **, char **);
 int add_tower(my_obj_t **, char **);
 bool inside_tower(my_obj_t *, sfFloatRect);
-int check_linear(void *);
+int check_linear(my_obj_t *, void *);
 int setup_linear(my_obj_t *, my_container_t *);
 bool rect_intersect(sfFloatRect, sfFloatRect);
 

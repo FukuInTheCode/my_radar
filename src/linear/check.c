@@ -7,11 +7,8 @@
 
 #include "my.h"
 
-int check_linear(void *data)
+int check_linear(my_obj_t *head, void *data)
 {
-    my_obj_t *head = data;
-
-    printf("Hello\n");
     for (my_obj_t *other = head->next; other; other = other->next) {
         if (!other->is_plane || !other->is_flying || other->is_dead)
             continue;

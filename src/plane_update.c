@@ -7,8 +7,6 @@
 
 #include "my.h"
 
-
-
 static bool check_safety(my_obj_t *first, my_obj_t *current)
 {
     current->is_safe = false;
@@ -50,7 +48,7 @@ int update_plane(sfRenderWindow *w, my_obj_t *head, my_container_t *con,
     con->setup_f(head, con);
     for (; head; head = head->next)
         head->is_plane && !head->is_dead && head->is_flying &&
-            con->check_f(con->data);
+            con->check_f(head, con->data);
     sfClock_restart(clock);
     return 0;
 }
