@@ -18,6 +18,8 @@ CSFML = -lcsfml-system -lcsfml-window -lcsfml-network \
 CRITERION = -lcriterion
 
 SRC	= src/my_radar.c \
+	  src/my_strncmp.c \
+	  src/my_strlen.c \
 
 OBJ	= $(SRC:.c=.o)
 
