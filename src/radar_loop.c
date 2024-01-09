@@ -18,7 +18,28 @@ static int create_all(sfRenderWindow **w, sfSprite *bg)
     return 0;
 }
 
-int game_loop(my_obj_t *head)
+static int free_all(sfRenderWindow *w, sfClock *clock,
+    sfSprite *bg, my_obj_t *head)
+{
+    if (w)
+        sfRenderWindow_destroy(w);
+    if (bg && sfSprite_getTexture(bg))
+        sfTexture_destroy((void *)sfSprite_getTexture(bg));
+    if (bg)
+        sfSprite_destroy(bg);
+    if (clock)
+        sfClock_destroy(clock);
+    head->is_first = false;
+    for (; head; head = head->next) {
+        if (head->is_plane)
+            remove_plane(head);
+        if (!head->is_plane)
+            remove_tower(head);
+    }
+    return 0;
+}
+
+int game_loop(my_obj_t **head)
 {
     int error = 0;
     sfClock *clock = sfClock_create();
@@ -32,13 +53,10 @@ int game_loop(my_obj_t *head)
         sfRenderWindow_clear(w, sfBlack);
         sfRenderWindow_drawSprite(w, bg, NULL);
         do_events_loop(w, &flags);
-        draw_plane(w, head, &flags);
-        draw_tower(w, head, &flags);
-        update_plane(w, head, &con, clock);
-        int i = 0;
-        for (my_obj_t *tmp = head; tmp; tmp = tmp->next)
-            i++;
+        draw_plane(w, *head, &flags);
+        draw_tower(w, *head, &flags);
+        update_plane(w, *head, &con, clock);
         sfRenderWindow_display(w);
     }
-    return error;
+    return error | free_all(w, clock, bg, *head);
 }

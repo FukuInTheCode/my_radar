@@ -51,16 +51,16 @@ static int plane_info(my_obj_t *new, char **arr)
 int add_plane(my_obj_t **head, char **arr)
 {
     my_obj_t *new = malloc(sizeof(my_obj_t));
+    static sfTexture *t = NULL;
 
-    if (!new)
+    if (!t)
+        t = sfTexture_createFromFile(paths[0], NULL);
+    if (!new || !t)
         return 84;
     new->sprite = sfSprite_create();
     if (!new->sprite)
         return 84;
-    sfSprite_setTexture(new->sprite,
-        sfTexture_createFromFile(paths[0], NULL), sfTrue);
-    if (!sfSprite_getTexture(new->sprite))
-        return 84;
+    sfSprite_setTexture(new->sprite, t, sfTrue);
     if (plane_info(new, arr))
         return 84;
     if (*head)
