@@ -7,7 +7,8 @@
 
 #ifndef MY_H
     #define MY_H
-    #define  _GNU_SOURCE
+    #include <SFML/Window/Event.h>
+#define  _GNU_SOURCE
     #include <stdio.h>
     #include <unistd.h>
     #include <stdint.h>
@@ -66,10 +67,10 @@ int do_events_loop(sfRenderWindow *, my_obj_t *, void **);
 char **my_str_to_word_array(char const *);
 char *my_strdup(char const *);
 char *my_strcpy(char *, char const *);
+int handle_close(sfRenderWindow *);
 
 static my_evt_t const my_events[] = {
-//    {sfEvtClosed, handle_close},
-//    {sfEvtKeyPressed, handle_close}
+    {sfEvtClosed, handle_close},
     {sfEvtCount, NULL},
 };
 

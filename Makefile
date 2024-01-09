@@ -31,6 +31,7 @@ SRC	= src/my_radar.c \
 	  src/my_strdup.c \
 	  src/my_strcpy.c \
 	  src/my_strcmp.c \
+	  src/handle_close.c \
 
 OBJ	= $(SRC:.c=.o)
 
