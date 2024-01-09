@@ -32,6 +32,7 @@ SRC	= src/my_radar.c \
 	  src/my_strcpy.c \
 	  src/my_strcmp.c \
 	  src/handle_close.c \
+	  src/plane_add.c \
 
 OBJ	= $(SRC:.c=.o)
 

@@ -48,8 +48,17 @@ typedef struct {
 
 typedef struct obj {
     sfSprite *sprite;
-    bool is_flying;
     bool is_plane;
+    union {
+        struct {
+            bool is_flying;
+            sfVector2f velocity;
+            sfVector2f to;
+            sfFloatRect hitbox;
+            uint64_t depart_time;
+        };
+        sfCircleShape *zone;
+    };
     struct obj *next;
 } my_obj_t;
 
@@ -67,6 +76,7 @@ char **my_str_to_word_array(char const *);
 char *my_strdup(char const *);
 char *my_strcpy(char *, char const *);
 int handle_close(sfRenderWindow *);
+int add_plane(my_obj_t **, char **);
 
 static my_evt_t const my_events[] = {
     {sfEvtClosed, handle_close},
