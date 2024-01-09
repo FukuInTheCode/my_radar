@@ -76,8 +76,7 @@ int open_file(char const *path)
     if (!fd || stat(path, &s))
         error |= 84;
     if (error == 84)
-        return 44 + write(2, "./my_radar: bad arguments\nretry with -h\n", 40)
-            + fclose(fd);
+        return 44 + write(2, "./my_radar: bad arguments\nretry with -h\n", 40);
     if (check_file(fd, s.st_size, &head))
         return 84;
     error |= game_loop(head);
