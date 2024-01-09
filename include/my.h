@@ -56,6 +56,7 @@ typedef struct obj {
             sfVector2f to;
             sfVector2f from;
             uint64_t depart_time;
+            double time_alive;
         };
         sfCircleShape *zone;
     };
