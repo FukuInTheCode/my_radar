@@ -20,6 +20,8 @@ CRITERION = -lcriterion
 SRC	= src/my_radar.c \
 	  src/my_strncmp.c \
 	  src/my_strlen.c \
+	  src/radar_file.c \
+	  src/radar_usage.c \
 
 OBJ	= $(SRC:.c=.o)
 
