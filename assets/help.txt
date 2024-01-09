@@ -11,6 +11,5 @@ OPTIONS
 USER INTERACTIONS
     ‘L’ key enable/disable hitboxes and areas.
     ‘S’ key enable/disable sprites.
-    ‘1’ key disable all optimization.
-    ‘2’ key use QuadTree.
+    ‘Escape’ key quit simulation
 
