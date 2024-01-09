@@ -22,7 +22,7 @@ int game_loop(my_obj_t *head)
 {
     int error = 0;
     sfClock *clock = sfClock_create();
-    void *tree = NULL;
+    my_container_t con = {setup_linear, check_linear, NULL};
     sfRenderWindow *w = NULL;
     sfSprite *bg = sfSprite_create();
     my_flags_t flags = {true, true};
@@ -34,7 +34,7 @@ int game_loop(my_obj_t *head)
         do_events_loop(w, &flags);
         draw_plane(w, head, &flags);
         draw_tower(w, head, &flags);
-        update_plane(w, head, tree, clock);
+        update_plane(w, head, &con, clock);
         sfRenderWindow_display(w);
     }
     return error;

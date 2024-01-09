@@ -66,10 +66,19 @@ typedef struct obj {
             sfFloatRect bounds;
             bool is_safe;
         };
-        sfCircleShape *zone;
+        struct {
+            sfCircleShape *zone;
+            struct obj *next_tower;
+        };
     };
     struct obj *next;
 } my_obj_t;
+
+typedef struct {
+    func setup_f;
+    func check_f;
+    void *data;
+} my_container_t;
 
 int get_global_bounds(my_obj_t *);
 int my_getnbr(char const *);
@@ -79,7 +88,7 @@ int my_strcmp(char const *, char const *);
 int open_file(char const *);
 int display_usage(void);
 int game_loop(my_obj_t *);
-int update_plane(sfRenderWindow *, my_obj_t *, void *, sfClock *);
+int update_plane(sfRenderWindow *, my_obj_t *, my_container_t *, sfClock *);
 int draw_plane(sfRenderWindow *, my_obj_t *, my_flags_t *);
 int draw_tower(sfRenderWindow *, my_obj_t *, my_flags_t *);
 int do_events_loop(sfRenderWindow *, my_flags_t *);
@@ -90,6 +99,9 @@ int handle_close(sfRenderWindow *);
 int add_plane(my_obj_t **, char **);
 int add_tower(my_obj_t **, char **);
 bool inside_tower(my_obj_t *, sfFloatRect);
+int check_linear(void *);
+int setup_linear(my_obj_t *, my_container_t *);
+bool rect_intersect(sfFloatRect, sfFloatRect);
 
 static my_evt_t const my_events[] = {
     {sfEvtClosed, handle_close},
