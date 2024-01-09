@@ -51,8 +51,10 @@ int add_plane_qtree(my_qtree_t *qtree, my_obj_t *plane)
             add_plane_qtree(qtree->bot_r, plane);
     if (qtree->len + 1 >= QUADTREE_SIZE)
         return switch_to_branch(qtree, plane);
-    if (rect_intersect(qtree->rect, plane->bounds))
-        qtree->arr[qtree->len++] = plane;
+    if (rect_intersect(qtree->rect, plane->bounds)) {
+        qtree->arr[qtree->len] = plane;
+        qtree->len++;
+    }
     return 0;
 }
 
