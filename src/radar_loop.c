@@ -6,6 +6,7 @@
 */
 
 #include "my.h"
+#include <SFML/Graphics/Types.h>
 
 static int create_all(sfRenderWindow **w, sfSprite *bg)
 {
@@ -52,22 +53,20 @@ static bool check_end(my_obj_t *head)
     return false;
 }
 
-int game_loop(my_obj_t **head)
+int game_loop(my_obj_t **head, size_t elasped)
 {
-    int error = 0;
     sfClock *clock = sfClock_create();
     my_container_t con = {LINEAR, setup_linear, check_linear, NULL};
     sfRenderWindow *w = NULL;
     sfSprite *bg = sfSprite_create();
     my_flags_t flags = {false, true};
+    int error = create_all(&w, bg);
 
-    sfClock_restart(clock);
-    for (error |= create_all(&w, bg); !error && sfRenderWindow_isOpen(w);) {
+    for (sfClock *c = sfClock_create(); !error && sfRenderWindow_isOpen(w);) {
         sfRenderWindow_clear(w, sfBlack);
         sfRenderWindow_drawSprite(w, bg, NULL);
-        do_events_loop(w, &flags, &con);
-        draw_plane(w, *head, &flags) | 1 && draw_tower(w, *head, &flags);
-        update_plane(w, *head, &con, clock);
+        do_events_loop(w, &flags, &con) | 1 && draw_plane(w, *head, &flags);
+        !draw_tower(w, *head, &flags) && update_plane(w, *head, &con, clock);
         sfRenderWindow_display(w);
         if (check_end(*head))
             sfRenderWindow_close(w);

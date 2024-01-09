@@ -106,7 +106,7 @@ int my_strncmp(char const *, char const *, int);
 int my_strcmp(char const *, char const *);
 int open_file(char const *);
 int display_usage(void);
-int game_loop(my_obj_t **);
+int game_loop(my_obj_t **, size_t);
 int update_plane(sfRenderWindow *, my_obj_t *, my_container_t *, sfClock *);
 int draw_plane(sfRenderWindow *, my_obj_t *, my_flags_t *);
 int draw_tower(sfRenderWindow *, my_obj_t *, my_flags_t *);
@@ -126,6 +126,11 @@ int remove_plane(my_obj_t *);
 int remove_tower(my_obj_t *);
 int handle_key(sfRenderWindow *, sfEvent, my_flags_t *, my_container_t *);
 bool check_safety(my_obj_t *, my_obj_t *);
+char *my_put_nbr(int);
+char *my_strcat(char *, char const *);
+char *my_strncat(char *, char const *, int);
+int add_buffer(char **, char *, int);
+char *my_revstr(char *);
 
 static my_evt_t const my_events[] = {
     {sfEvtKeyPressed, handle_key},
