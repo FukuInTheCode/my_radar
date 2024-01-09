@@ -89,6 +89,7 @@ char *my_strcpy(char *, char const *);
 int handle_close(sfRenderWindow *);
 int add_plane(my_obj_t **, char **);
 int add_tower(my_obj_t **, char **);
+bool inside_tower(my_obj_t *, sfFloatRect);
 
 static my_evt_t const my_events[] = {
     {sfEvtClosed, handle_close},

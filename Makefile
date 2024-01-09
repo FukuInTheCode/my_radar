@@ -1,6 +1,6 @@
 ##
 ## EPITECH PROJECT, 2023
-## settingup Makefile
+## Makefile
 ## File description:
 ## Placeholder
 ##
@@ -9,44 +9,45 @@ NAME   = my_radar
 
 CC	   = gcc
 
-CFLAGS = -Wall -Wextra -Wno-unused-value -Wno-sign-compare \
-	-Wno-unused-parameter -I./include -g -std=c99 -lm -lc
+WFLAGS = -Wall -Wextra -Wno-unused-value -Wno-sign-compare 	\
+			-Wno-unused-parameter 							\
 
-CSFML = -lcsfml-system -lcsfml-window -lcsfml-network \
-			-lcsfml-graphics -lcsfml-audio
+CSFML = -lcsfml-system -lcsfml-window -lcsfml-graphics -lcsfml-audio \
+		-lcsfml-network
 
-CRITERION = -lcriterion
+LIBS = -lm $(CSFML)
 
-SRC	= src/my_radar.c \
-	  src/my_strncmp.c \
-	  src/my_strlen.c \
-	  src/radar_file.c \
-	  src/radar_usage.c \
-	  src/radar_loop.c \
-	  src/handle_events.c \
-	  src/plane_draw.c \
-	  src/tower_draw.c \
-	  src/plane_update.c \
-	  src/my_getnbr.c \
-	  src/my_str_to_word_array.c \
-	  src/my_strdup.c \
-	  src/my_strcpy.c \
-	  src/my_strcmp.c \
-	  src/handle_close.c \
-	  src/plane_add.c \
-	  src/tower_add.c \
+CFLAGS = -I./include/ $(WFLAGS) $(LIBS)
 
-OBJ	= $(SRC:.c=.o)
+SRC	= $(shell find src/ -type f -name "*.c")
+
+OBJ	= $(SRC:src/%.c=obj/%.o)
+
+RED = \033[1;31m
+
+GREEN = \033[1;32m
+
+BLUE = \033[1;34m
+
+NC = \033[0m
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	@$(CC) -o $(NAME) $(OBJ) $(CFLAGS) $(CSFML) \
-	$(CRITERION)
+	@echo -e "$(BLUE)Compiling binary...$(NC)"
+	@$(CC) -o $(NAME) $(OBJ) $(CFLAGS)
+
+obj/%.o: src/%.c
+	@echo -e "$(GREEN)Compiling $<...$(NC)"
+	@mkdir -p $(dir $@)
+	@$(CC) -c -o $@ $< $(CFLAGS)
+
 clean:
-	@rm -f $(OBJ)
+	@if [ -d obj/ ]; then echo -e "$(RED)Cleaning objects.$(NC)"; fi
+	@rm -rf obj
 
 fclean: clean
+	@if [ -e "$(NAME)" ]; then echo -e "$(RED)Cleaning binary.$(NC)"; fi
 	@rm -f $(NAME)
 
 re: fclean all
