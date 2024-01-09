@@ -11,6 +11,7 @@ int remove_plane(my_obj_t *plane)
 {
     if (!plane->is_plane)
         return 84;
+    plane->is_dead = true;
     if (plane->is_first)
         return 0;
     sfSprite_destroy(plane->sprite);
