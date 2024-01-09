@@ -7,16 +7,26 @@
 
 #include "my.h"
 
-int game_loop(sfRenderWindow *w, my_plane_t *head)
+static int create_window(sfRenderWindow **w)
+{
+    *w = sfRenderWindow_create((sfVideoMode){1920, 1080, 32}, "9/11",
+        sfClose | sfTitlebar, NULL);
+    return 0;
+}
+
+int game_loop(my_plane_t *head)
 {
     int error = 0;
-    static sfClock clock = sfClock_create();
+    sfClock *clock = sfClock_create();
     void *tree = NULL;
+    sfRenderWindow *w = NULL;
 
-    for (; sfRenderWindow_isOpen(w);) {
+    sfClock_restart(clock);
+    for (create_window(&w); sfRenderWindow_isOpen(w);) {
         sfRenderWindow_clear(w, sfBlack);
-        do_events_loop(w, head);
-        plane_update(w, head);
+        do_events_loop(w, head, &tree);
+        update_plane(w, head, tree);
+        draw_plane(w, head);
         sfRenderWindow_display(w);
     }
     return error;

@@ -10,7 +10,7 @@ NAME   = my_radar
 CC	   = gcc
 
 CFLAGS = -Wall -Wextra -Wno-unused-value -Wno-sign-compare \
-	-Wno-unused-parameter -I./include -g -std=c99 -lm
+	-Wno-unused-parameter -I./include -g -std=c99 -lm -lc
 
 CSFML = -lcsfml-system -lcsfml-window -lcsfml-network \
 			-lcsfml-graphics -lcsfml-audio
@@ -22,6 +22,10 @@ SRC	= src/my_radar.c \
 	  src/my_strlen.c \
 	  src/radar_file.c \
 	  src/radar_usage.c \
+	  src/radar_loop.c \
+	  src/handle_events.c \
+	  src/plane_draw.c \
+	  src/plane_update.c \
 
 OBJ	= $(SRC:.c=.o)
 

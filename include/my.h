@@ -7,7 +7,7 @@
 
 #ifndef MY_H
     #define MY_H
-    #include <SFML/Window/Event.h>
+    #define  _GNU_SOURCE
     #include <stdio.h>
     #include <unistd.h>
     #include <stdint.h>
@@ -55,7 +55,10 @@ size_t my_strlen(char const *);
 int my_strncmp(char const *, char const *, int);
 int open_file(char const *);
 int display_usage(void);
-int game_loop(sfRenderWindow *, my_plane_t *);
+int game_loop(my_plane_t *);
+int update_plane(sfRenderWindow *, my_plane_t *, void *);
+int draw_plane(sfRenderWindow *, my_plane_t *);
+int do_events_loop(sfRenderWindow *, my_plane_t *, void **);
 
 static my_evt_t const my_events[] = {
 //    {sfEvtClosed, handle_close},
