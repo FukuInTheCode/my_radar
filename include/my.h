@@ -54,6 +54,7 @@ typedef struct obj {
             bool is_flying;
             sfVector2f velocity;
             sfVector2f to;
+            sfVector2f from;
             uint64_t depart_time;
         };
         sfCircleShape *zone;

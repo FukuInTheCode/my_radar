@@ -26,6 +26,7 @@ static int plane_info(my_obj_t *new, char **arr)
     new->is_flying = true;
     new->is_plane = true;
     new->to = (sfVector2f){my_getnbr(arr[3]), my_getnbr(arr[4])};
+    new->from = sfSprite_getPosition(new->sprite);
     new->velocity = (sfVector2f){my_getnbr(arr[5]) * cos(get_angle(arr)) / 20.,
         my_getnbr(arr[5]) * sin(get_angle(arr)) / 20.};
     sfSprite_setRotation(new->sprite, 180. / M_PI * get_angle(arr) + 90.);
