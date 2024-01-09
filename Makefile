@@ -25,6 +25,7 @@ SRC	= src/my_radar.c \
 	  src/radar_loop.c \
 	  src/handle_events.c \
 	  src/plane_draw.c \
+	  src/tower_draw.c \
 	  src/plane_update.c \
 	  src/my_getnbr.c \
 	  src/my_str_to_word_array.c \
@@ -33,6 +34,7 @@ SRC	= src/my_radar.c \
 	  src/my_strcmp.c \
 	  src/handle_close.c \
 	  src/plane_add.c \
+	  src/tower_add.c \
 
 OBJ	= $(SRC:.c=.o)
 

@@ -14,13 +14,17 @@ static bool rect_intersect(sfFloatRect a, sfFloatRect b)
     double right_b = b.left + b.width;
     double bot_b = b.top + b.height;
 
-    if (a.top <= b.top && b.top <= bot_a)
+    if (a.top <= b.top && b.top <= bot_a &&
+        a.left <= b.left && b.left <= right_a)
         return true;
-    if (a.top <= bot_b && bot_b <= bot_a)
+    if (a.top <= b.top && b.top <= bot_a &&
+        a.left <= right_b && right_b <= right_a)
         return true;
-    if (a.left <= right_b && right_b <= right_a)
+    if (a.top <= bot_b && bot_b <= bot_a &&
+        a.left <= b.left && b.left <= right_a)
         return true;
-    if (a.left <= right_b && right_b <= right_a)
+    if (a.top <= bot_b && bot_b <= bot_a &&
+        a.left <= right_b && right_b <= right_a)
         return true;
     return false;
 }
@@ -28,7 +32,7 @@ static bool rect_intersect(sfFloatRect a, sfFloatRect b)
 static int check_collision(my_obj_t *head, void *tree)
 {
     for (my_obj_t *other = head->next; other; other = other->next) {
-        if (!other->is_plane || !other->is_flying || !other->is_dead)
+        if (!other->is_plane || !other->is_flying || other->is_dead)
             continue;
         if (!rect_intersect(head->bounds, other->bounds))
             continue;
@@ -69,7 +73,8 @@ int update_plane(sfRenderWindow *w, my_obj_t *head, void *tree,
     for (my_obj_t *tmp = head; tmp; tmp = tmp->next)
         inside_loop(tmp, pos);
     for (; head; head = head->next)
-        head->is_plane && check_collision(head, tree);
+        head->is_plane && !head->is_dead && head->is_flying &&
+            check_collision(head, tree);
     sfClock_restart(clock);
     return 0;
 }

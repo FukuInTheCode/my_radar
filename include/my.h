@@ -80,12 +80,14 @@ int display_usage(void);
 int game_loop(my_obj_t *);
 int update_plane(sfRenderWindow *, my_obj_t *, void *, sfClock *);
 int draw_plane(sfRenderWindow *, my_obj_t *, my_flags_t *);
+int draw_tower(sfRenderWindow *, my_obj_t *, my_flags_t *);
 int do_events_loop(sfRenderWindow *, my_obj_t *, void **);
 char **my_str_to_word_array(char const *);
 char *my_strdup(char const *);
 char *my_strcpy(char *, char const *);
 int handle_close(sfRenderWindow *);
 int add_plane(my_obj_t **, char **);
+int add_tower(my_obj_t **, char **);
 
 static my_evt_t const my_events[] = {
     {sfEvtClosed, handle_close},

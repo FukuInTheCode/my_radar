@@ -56,6 +56,8 @@ static int check_file(FILE *fd, size_t n, my_obj_t **head)
         arr = my_str_to_word_array(line);
         if (check_line(arr))
             return 84;
+        if (!my_strcmp(arr[0], "T"))
+            add_tower(head, arr);
         if (!my_strcmp(arr[0], "A"))
             add_plane(head, arr);
         free(arr);

@@ -32,8 +32,9 @@ int game_loop(my_obj_t *head)
         sfRenderWindow_clear(w, sfBlack);
         sfRenderWindow_drawSprite(w, bg, NULL);
         do_events_loop(w, head, &tree);
-        update_plane(w, head, tree, clock);
         draw_plane(w, head, &flags);
+        draw_tower(w, head, &flags);
+        update_plane(w, head, tree, clock);
         sfRenderWindow_display(w);
     }
     return error;

@@ -24,7 +24,7 @@ int draw_plane(sfRenderWindow *w, my_obj_t *head, my_flags_t *flags)
     sfRectangleShape *rect = NULL;
 
     for (rect = create_rect(); head; head = head->next) {
-        if ((head->is_plane && !head->is_flying) || head->is_dead)
+        if (!head->is_plane || !head->is_flying || head->is_dead)
             continue;
         if (flags->show_texture)
             sfRenderWindow_drawSprite(w, head->sprite, NULL);
