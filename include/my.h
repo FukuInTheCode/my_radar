@@ -50,6 +50,7 @@ typedef struct {
 typedef struct obj {
     sfSprite *sprite;
     bool is_plane;
+    bool is_first;
     union {
         struct {
             bool is_flying;
@@ -68,6 +69,7 @@ typedef struct obj {
         };
     };
     struct obj *next;
+    struct obj *previous;
 } my_obj_t;
 
 typedef struct qtree {
@@ -76,6 +78,7 @@ typedef struct qtree {
     uint8_t len;
     sfVector2f top_left;
     sfVector2f bot_right;
+    sfFloatRect rect;
     struct {
         struct qtree *top_l;
         struct qtree *top_r;
@@ -118,6 +121,8 @@ bool inside_tower(my_obj_t *, sfFloatRect);
 int check_linear(my_obj_t *, void *);
 int setup_linear(my_obj_t *, my_container_t *);
 bool rect_intersect(sfFloatRect a, sfFloatRect b);
+int add_plane_qtree(my_qtree_t *, my_obj_t *);
+int remove_plane(my_obj_t *);
 
 static my_evt_t const my_events[] = {
     {sfEvtClosed, handle_close},

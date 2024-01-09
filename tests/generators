@@ -9,7 +9,7 @@ def generate_line():
     third_number = randint(1, 1920)
     fourth_number = randint(1, 1080)
     last_number = randint(1, 99)
-    time = randint(1, 60)
+    time = randint(0, 1) * 0
     return f"A {first_number} {second_number} {third_number} {fourth_number} {last_number} {time}"
 
 def generate_tower():

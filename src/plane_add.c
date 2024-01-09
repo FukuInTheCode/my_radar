@@ -44,6 +44,7 @@ static int plane_info(my_obj_t *new, char **arr)
     new->time_alive = 0;
     new->depart_time = my_getnbr(arr[6]);
     new->is_dead = false;
+    new->is_first = false;
     return 0;
 }
 
@@ -62,7 +63,10 @@ int add_plane(my_obj_t **head, char **arr)
         return 84;
     if (plane_info(new, arr))
         return 84;
+    if (*head)
+        (*head)->previous = new;
     new->next = *head;
+    new->previous = NULL;
     *head = new;
     return 0;
 }

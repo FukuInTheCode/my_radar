@@ -35,6 +35,9 @@ int game_loop(my_obj_t *head)
         draw_plane(w, head, &flags);
         draw_tower(w, head, &flags);
         update_plane(w, head, &con, clock);
+        int i = 0;
+        for (my_obj_t *tmp = head; tmp; tmp = tmp->next)
+            i++;
         sfRenderWindow_display(w);
     }
     return error;

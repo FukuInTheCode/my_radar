@@ -24,6 +24,7 @@ static int tower_info(my_obj_t *new, char **arr)
     sfCircleShape_move(new->zone,
         (sfVector2f){my_getnbr(arr[3]) * -1920. / 100. + 25,
         my_getnbr(arr[3]) * -1920 / 100. + 20});
+    new->is_first = false;
     return 0;
 }
 
@@ -42,7 +43,10 @@ int add_tower(my_obj_t **head, char **arr)
         return 84;
     if (tower_info(new, arr))
         return 84;
+    if (*head)
+        (*head)->previous = new;
     new->next = *head;
+    new->previous = NULL;
     *head = new;
     return 0;
 }

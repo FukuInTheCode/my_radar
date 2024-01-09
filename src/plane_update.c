@@ -30,11 +30,12 @@ static int inside_loop(my_obj_t *head, sfVector2f pos, my_obj_t *first)
     if (head->time_alive >= head->depart_time)
         head->is_flying = true;
     if ((head->from.x >= head->to.x && head->to.x >= pos.x) ||
-        (head->from.y >= head->to.y && head->to.y >= pos.y))
+        (head->from.y >= head->to.y && head->to.y >= pos.y) ||
+        (pos.x >= head->to.x && head->to.x >= head->from.x) ||
+        (pos.y >= head->to.y && head->to.y >= head->from.y)) {
         head->is_flying = false;
-    if ((pos.x >= head->to.x && head->to.x >= head->from.x) ||
-        (pos.y >= head->to.y && head->to.y >= head->from.y))
-        head->is_flying = false;
+        remove_plane(head);
+    }
     return 0;
 }
 

@@ -62,6 +62,7 @@ static int check_file(FILE *fd, size_t n, my_obj_t **head)
             add_plane(head, arr);
         free(arr);
     }
+    (*head)->is_first = true;
     free(line);
     return 0;
 }
