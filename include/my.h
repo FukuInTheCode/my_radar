@@ -110,7 +110,7 @@ int game_loop(my_obj_t **);
 int update_plane(sfRenderWindow *, my_obj_t *, my_container_t *, sfClock *);
 int draw_plane(sfRenderWindow *, my_obj_t *, my_flags_t *);
 int draw_tower(sfRenderWindow *, my_obj_t *, my_flags_t *);
-int do_events_loop(sfRenderWindow *, my_flags_t *);
+int do_events_loop(sfRenderWindow *, my_flags_t *, my_container_t *);
 char **my_str_to_word_array(char const *);
 char *my_strdup(char const *);
 char *my_strcpy(char *, char const *);
@@ -124,8 +124,10 @@ bool rect_intersect(sfFloatRect a, sfFloatRect b);
 int add_plane_qtree(my_qtree_t *, my_obj_t *);
 int remove_plane(my_obj_t *);
 int remove_tower(my_obj_t *);
+int handle_key(sfRenderWindow *, sfEvent, my_flags_t *, my_container_t *);
 
 static my_evt_t const my_events[] = {
+    {sfEvtKeyPressed, handle_key},
     {sfEvtClosed, handle_close},
     {sfEvtCount, NULL},
 };
