@@ -48,13 +48,22 @@ static int plane_info(my_obj_t *new, char **arr)
     return 0;
 }
 
+static int append(my_obj_t **head, my_obj_t *new)
+{
+    if (*head)
+        (*head)->previous = new;
+    new->next = *head;
+    new->previous = NULL;
+    *head = new;
+    return 0;
+}
+
 int add_plane(my_obj_t **head, char **arr)
 {
     my_obj_t *new = malloc(sizeof(my_obj_t));
     static sfTexture *t = NULL;
 
-    if (!t)
-        t = sfTexture_createFromFile(paths[0], NULL);
+    t = sfTexture_createFromFile(paths[0], NULL);
     if (!new || !t)
         return 84;
     new->sprite = sfSprite_create();
@@ -63,10 +72,5 @@ int add_plane(my_obj_t **head, char **arr)
     sfSprite_setTexture(new->sprite, t, sfTrue);
     if (plane_info(new, arr))
         return 84;
-    if (*head)
-        (*head)->previous = new;
-    new->next = *head;
-    new->previous = NULL;
-    *head = new;
-    return 0;
+    return append(head, new);
 }

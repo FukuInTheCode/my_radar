@@ -125,6 +125,7 @@ int add_plane_qtree(my_qtree_t *, my_obj_t *);
 int remove_plane(my_obj_t *);
 int remove_tower(my_obj_t *);
 int handle_key(sfRenderWindow *, sfEvent, my_flags_t *, my_container_t *);
+bool check_safety(my_obj_t *, my_obj_t *);
 
 static my_evt_t const my_events[] = {
     {sfEvtKeyPressed, handle_key},

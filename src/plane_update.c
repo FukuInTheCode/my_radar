@@ -7,7 +7,7 @@
 
 #include "my.h"
 
-static bool check_safety(my_obj_t *first, my_obj_t *current)
+bool check_safety(my_obj_t *first, my_obj_t *current)
 {
     current->is_safe = false;
     for (; first; first = first->next)
